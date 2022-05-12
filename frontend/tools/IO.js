@@ -19,5 +19,10 @@ const IO = {
         let chatOutput1 = document.querySelector("#chatOutput1");
         let style = "style='font-size: " + this.chat_text_size + "; color: " + this.chat_text_color + "'";
         chatOutput1.innerHTML = chatOutput1.innerHTML + "<p " + style + " >" + message + "</p>";
+        autoScroll();
+    },
+    chat_send(message) {
+        this.send("chat", message);
+        console.log(message);
     }
 }

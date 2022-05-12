@@ -27,6 +27,15 @@ GameServer = {
             IO.send("join", "0", id);
             IO.send("chat", chat_messages.onJoin + "  " + name, id);
         }
+    },
+    find_player_by_id(id) {
+        let result = false;
+        this.online_clients.forEach((client, index) => {
+            if (client.id == id) {
+                result = client;
+            }
+        })
+        return result;
     }
 }
 module.exports = GameServer;

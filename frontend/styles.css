@@ -9,8 +9,9 @@ h1 {
 }
 
 .chat {
-    width: 1000;
-    height: 800;
+    width: auto;
+    height: 400;
+    overflow: auto;
     background-color: black;
     position: relative;
 }

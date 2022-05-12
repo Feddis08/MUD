@@ -1,6 +1,7 @@
 "use strict";
 const GameServer = require("./classes/module/GameServer.js");
 const IO = require("./classes/module/IO.js");
+const commands = require("./classes/module/commands.js");
 var express = require("express");
 var app = express();
 var port = 3030;
@@ -15,7 +16,9 @@ io.on("connection", (socket) => {
     let id = socket.id;
     console.log("[I/O][SOCKET_STREAM_CONNECTION]: User started a stream: ", id);
     socket.on("join", (data) => {
-        console.log(data);
         GameServer.add_player_by_socketID(id, data.player_name);
+    })
+    socket.on("chat", (message) => {
+        commands.executer(message, id);
     })
 })
