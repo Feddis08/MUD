@@ -1,4 +1,5 @@
 const Player = require("../entities/Player.js");
+const chat_messages = require("../module/res/chat_messages.js");
 const IO = require("./IO.js");
 GameServer = {
     online_clients: [],
@@ -24,7 +25,7 @@ GameServer = {
             let player = new Player(id, name);
             this.online_clients.push(player);
             IO.send("join", "0", id);
-
+            IO.send("chat", chat_messages.onJoin + "  " + name, id);
         }
     }
 }

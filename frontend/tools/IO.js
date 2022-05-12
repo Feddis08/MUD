@@ -2,7 +2,8 @@ const IO = {
     socketIO: null,
     id: null,
     server_address: null,
-
+    chat_text_color: null,
+    chat_text_size: null,
     send(name, message) {
         this.socketIO.emit(name, message);
     },
@@ -16,6 +17,7 @@ const IO = {
     },
     chat1_write(message) {
         let chatOutput1 = document.querySelector("#chatOutput1");
-        chatOutput1.innerHTML = chatOutput1.innerHTML + "<p style='font-size: 32px'>" + message + "</p>";
+        let style = "style='font-size: " + this.chat_text_size + "; color: " + this.chat_text_color + "'";
+        chatOutput1.innerHTML = chatOutput1.innerHTML + "<p " + style + " >" + message + "</p>";
     }
 }

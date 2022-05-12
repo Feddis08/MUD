@@ -24,16 +24,22 @@ async function connect() {
     await sleep(2500);
     if (IO.socketIO.connected) {
         status.textContent = "BUILD A CONNECTION ...";
+        IO.chat_text_color = text_color.value;
+        IO.chat_text_size = text_size.value;
         IO.send("join", { player_name: player_name.value });
         IO.socketIO.on("join", (data) => {
             if (data == "0") {
                 status.textContent = "START THE MAIN GAME ...";
+                document.body.innerHTML = loadPage("html/game.html")
             }
             if (data == "1") {
                 console.log("ERROR: Couldn't join server: player_name is already taken!");
                 status.textContent = "ERROR: COULD NOT JOIN SERVER: PLAYER_NAME IS ALREADY TAKEN!";
             }
         });
+        IO.socketIO.on("chat", (data) => {
+            IO.chat1_write(data);
+        })
     } else {
         console.log(IO.socketIO.connected)
         document.body.innerHTML = loadPage("html/connection_error.html");
