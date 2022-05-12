@@ -1,0 +1,23 @@
+{
+  "name": "mud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Feddis08/MUD.git"
+  },
+  "author": "Feddis08",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Feddis08/MUD/issues"
+  },
+  "homepage": "https://github.com/Feddis08/MUD#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "socket.io": "^4.5.0"
+  }
+}
