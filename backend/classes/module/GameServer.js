@@ -1,10 +1,13 @@
 const Player = require("../entities/Player.js");
 const chat_messages = require("../module/res/chat_messages.js");
 const IO = require("./IO.js");
+const Map = require("./maps/map.js");
 GameServer = {
     online_clients: [],
+    map: null,
     tick_speed: 100,
     start() {
+        this.map = new Map("test");
         setInterval(() => {
             this.game_loop();
         }, this.tickSpeed);

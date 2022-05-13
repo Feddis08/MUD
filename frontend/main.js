@@ -21,7 +21,7 @@ async function connect() {
     let status = document.querySelector("#status");
     status.textContent = "CONNECTING TO SERVER ...";
     IO.connect(server_address.value);
-    await sleep(2500);
+    await sleep(500);
     if (IO.socketIO.connected) {
         status.textContent = "BUILD A CONNECTION ...";
         IO.chat_text_color = text_color.value;

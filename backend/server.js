@@ -12,6 +12,7 @@ var server = app.listen(port, function () {
 app.use(express.static("../frontend"));
 var io = socket(server);
 IO.socketIO = io;
+GameServer.start();
 io.on("connection", (socket) => {
     let id = socket.id;
     console.log("[I/O][SOCKET_STREAM_CONNECTION]: User started a stream: ", id);
