@@ -29,6 +29,7 @@ GameServer = {
             this.online_clients.push(player);
             IO.send("join", "0", id);
             IO.send("chat", chat_messages.onJoin + "  " + name, id);
+            console.log("[PLAYERS][GAME_SERVER]: User connected: ", name);
         }
     },
     find_player_by_id(id) {
@@ -39,6 +40,22 @@ GameServer = {
             }
         })
         return result;
+    },
+    find_player_by_socketID(socketID) {
+        let result = false;
+        this.online_clients.forEach((client, index) => {
+            if (client.socketID == socketID) {
+                result = client;
+            }
+        })
+        return result;
+    },
+    remove_player_by_id(id) {
+        this.online_clients.forEach((client, index) => {
+            if (id == client.id) {
+                this.online_clients.splice(index, 1);
+            }
+        })
     }
 }
 module.exports = GameServer;

@@ -16,6 +16,11 @@ GameServer.start();
 io.on("connection", (socket) => {
     let id = socket.id;
     console.log("[I/O][SOCKET_STREAM_CONNECTION]: User started a stream: ", id);
+    socket.on("disconnect", (reason) => {
+        let player = GameServer.find_player_by_socketID(socket.id);
+        GameServer.remove_player_by_id(player.id);
+        console.log("[I/O][SOCKET_STREAM_CONNECTION]: User stopped a stream: ", id);
+    });
     socket.on("join", (data) => {
         GameServer.add_player_by_socketID(id, data.player_name);
     })
