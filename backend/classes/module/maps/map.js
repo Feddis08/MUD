@@ -13,6 +13,7 @@ class Map {
         room = new Room("Spawn");
         room.items.push(new Door(true, "test", ["Spawn", "Spawn"]))
         room.id = 1;
+        room.player_join_text = "Hello this is a nice place.";
         this.rooms.push(room);
         room = new Room("test");
         this.rooms.push(room);

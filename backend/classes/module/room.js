@@ -1,9 +1,11 @@
 const Door = require("./res/door.js")
+const IO = require("./IO.js")
 class Room {
-    id = null;
-    discribtion = null;
+    id = null
+    discribtion = "";
+    player_join_text = "";
     players = [];
-    name = null;
+    name = "";
     items = [];
     constructor(name) {
         this.name = name;
@@ -18,6 +20,8 @@ class Room {
     }
     add_player(player) {
         this.players.push(player);
+        this.commands(player, ["player_join"]);
+        IO.send("chat", this.player_join_text, player.socketID, true);
     }
     get_id() {
         this.id = Math.floor(Math.random());

@@ -23,7 +23,6 @@ commands = {
     },
     look_room(player) {
         let room = GameServer.map.get_room_by_id(player.room_id);
-        IO.send("chat", "" + room.name, player.socketID, true);
         IO.send("chat", "" + room.discribtion, player.socketID, true);
     },
     executer(command, player_id) {
