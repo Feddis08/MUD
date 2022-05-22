@@ -1,14 +1,25 @@
+const Door = require("./res/door.js")
 class Room {
     id = null;
     discribtion = null;
     players = null;
     name = null;
-    ways = [];
-    constructor(id, discribtion, name, ways,) {
-        this.id = id;
-        this.discribtion = discribtion;
+    items = [];
+    constructor(name) {
         this.name = name;
-        this.ways = ways;
+        this.get_id();
+    }
+    get_id() {
+        this.id = Math.floor(Math.random());
+    }
+    create_door(is_open) {
+        let door = new Door(is_open);
+        this.items.push(door);
+    }
+    commands(player, command) {
+        this.items.forEach((item, index) => {
+            item.commands(player, command);
+        })
     }
 }
 module.exports = Room;

@@ -21,22 +21,6 @@ commands = {
     help(player) {
         IO.send("chat", "The helpsection is COMMING SOON!", player.socketID, true);
     },
-    move_room(player, command) {
-        let room = GameServer.map.get_room_by_id(player.room_id);
-        let is_link = false;
-        let room_id = player.room_id;
-        room.ways.forEach((way, index) => {
-            if (is_link) {
-                is_link = false;
-                if (command[1] == way) {
-                    room_id = room.ways[index];
-                }
-            } else {
-                is_link = true;
-            }
-        })
-        player.room_id = room_id;
-    },
     look_room(player) {
         let room = GameServer.map.get_room_by_id(player.room_id);
         IO.send("chat", "" + room.name, player.socketID, true);
@@ -47,6 +31,8 @@ commands = {
         IO.send("chat", "> " + command, player.socketID, false)
         let command2 = command.split(" ");
         let valid_command = false;
+        let room = GameServer.map.get_room_by_id(player.room_id);
+        room.commands(player, command2);
         if (command2[0] == "ping") {
             this.ping(player);
             valid_command = true;
@@ -59,18 +45,10 @@ commands = {
             this.help(player);
             valid_command = true;
         }
-        if (command2[0] == "move") {
-            this.move_room(player, command2);
-            valid_command = true;
-        }
         if (command2[0] == "look") {
             this.look_room(player);
             valid_command = true;
         }
-        if (valid_command == false) {
-            IO.send("chat", "> Your command is not listed! Write 'help' for more information.", player.socketID, true);
-        }
-
     }
 };
 module.exports = commands;
