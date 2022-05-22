@@ -22,7 +22,7 @@ class Door {
     }
     move(player, command) {
         let room = GameServer.map.get_room_by_id(player.room_id);
-        let room_name;
+        let room_name = false;
         let is_link = false;
         this.link_points.forEach((_, index) => {
             if (is_link) {
@@ -34,7 +34,14 @@ class Door {
                 is_link = true;
             }
         })
-        player.room_id = GameServer.map.get_rooms_by_name(room_name)[0].id;
+        if (room_name == false) {
+            IO.send("chat", "There is no way to go!", player.socketID, true);
+        } else {
+            let new_room = GameServer.map.get_rooms_by_name(room_name)[0];
+            room.remove_player_by_id(player.id);
+            new_room.add_player(player);
+            player.room_id = new_room.id;
+        }
     }
     commands(player, command) {
         if (command[0] == "move") {

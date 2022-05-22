@@ -2,12 +2,22 @@ const Door = require("./res/door.js")
 class Room {
     id = null;
     discribtion = null;
-    players = null;
+    players = [];
     name = null;
     items = [];
     constructor(name) {
         this.name = name;
         this.get_id();
+    }
+    remove_player_by_id(id) {
+        this.players.forEach((client, index) => {
+            if (id == client.id) {
+                this.players.splice(index, 1);
+            }
+        })
+    }
+    add_player(player) {
+        this.players.push(player);
     }
     get_id() {
         this.id = Math.floor(Math.random());
